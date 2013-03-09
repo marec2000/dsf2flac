@@ -34,7 +34,7 @@ Noise floor is very slightly higher than dsd. The harmonic products seen in the 
 
 command: "dsf2flac -i 1kHztone_dsd64.dsf -r176400 -b24 -s6"
 
-This one is a bit of a surprise, as it is clearly a bit worse than the result with 88200Hz sampling rate. I suspect the problem is that the anti-aliasing filter used for 176500 does not have quite enough stop band rejection to stop the dsd ultrasonic noise from leaching back into the audio spectrum. I'll update this filter in the future and see if things improve!
+This one is a bit of a surprise, as it is clearly a bit worse than the result with 88200Hz sampling rate. I suspect the problem is that the anti-aliasing filter used for 176500 does not have quite enough stop band rejection to prevent the dsd ultrasonic noise from leaching back into the audio spectrum. I'll update this filter in the future and see if things improve!
 
 Incidentally this does highlight that there may be significant differences between dsd->pcm converters depending on the filters they use. I chose to use filters with very good stop band rejection (around -180dB) but I've seen quite a few bits of code using filters with much less (approx -140dB from memory).
 
