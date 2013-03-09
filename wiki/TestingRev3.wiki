@@ -26,6 +26,16 @@ I've now used dsf2pcm (revision 3) to convert back to pcm from the dsd64 dsf tes
 
 command: "dsf2flac -i 1kHztone_dsd64.dsf -r88200 -b24 -s6"
 
-I was pleasantly surprised by how well this works. Noise floor is about the same level as the dsd
+Noise floor is very slightly higher than dsd. The harmonic products seen in the dsd signal are present here too at the same levels. Everything seems to be working pretty well.
 
 [https://dsf2flac.googlecode.com/svn/wiki/testingRev3/converted88200Hz24bit.png]
+
+=== 176400Hz 24bit 6dB gain dither on ===
+
+command: "dsf2flac -i 1kHztone_dsd64.dsf -r176400 -b24 -s6"
+
+This one is a bit of a surprise, as it is clearly a bit worse than the result with 88200Hz sampling rate. I suspect the problem is that the anti-aliasing filter used for 176500 does not have quite enough stop band rejection to stop the dsd ultrasonic noise from leaching back into the audio spectrum. I'll update this filter in the future and see if things improve!
+
+Incidentally this does highlight that there may be significant differences between dsd->pcm converters depending on the filters they use. I chose to use filters with very good stop band rejection (around -180dB) but I've seen quite a few bits of code using filters with much less (approx -140dB from memory).
+
+[https://dsf2flac.googlecode.com/svn/wiki/testingRev3/converted176400Hz24bit.png]
