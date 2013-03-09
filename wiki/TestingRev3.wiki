@@ -6,8 +6,6 @@ Stage 1.
 
 Create a 176.4kHz 32bit wav file in Matlab with a 1kHz tone at -3dBFs. I added 1/(2^24) peak amplitude of tpdf dither (i.e. equiv to the significant precision).
 
+The fft spectrum of 1 sec of the data is shown below. This was computed in Matlab from the wav file.
 
-
-
-
-
+[https://dsf2flac.googlecode.com/svn/wiki/wav%20test%20tone.png]
