@@ -20,7 +20,7 @@ The 1bit quantization noise is pretty clear and you can see that it starts risin
 
 == Stage 3. Convert to PCM with dsf2pcm ==
 
-I've now used dsf2pcm (revision 3) to convert back to pcm from the dsd64 dsf test file. I repeated the conversion with a few different settings just to see the difference.
+I've now used dsf2pcm (revision 4) to convert back to pcm from the dsd64 dsf test file. I repeated the conversion with a few different settings just to see the difference.
 
 === 88200Hz 24bit 6dB gain dither on ===
 
