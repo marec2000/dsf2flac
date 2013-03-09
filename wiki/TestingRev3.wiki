@@ -39,3 +39,17 @@ This one is a bit of a surprise, as it is clearly a bit worse than the result wi
 Incidentally this does highlight that there may be significant differences between dsd->pcm converters depending on the filters they use. I chose to use filters with very good stop band rejection (around -180dB) but I've seen quite a few bits of code using filters with much less (approx -140dB from memory).
 
 [https://dsf2flac.googlecode.com/svn/wiki/testingRev3/converted176400Hz24bit.png]
+
+=== 88200Hz 24bit 6dB gain dither off ===
+
+command: "dsf2flac -i 1kHztone_dsd64.dsf -r88200 -b24 -s6 -n"
+
+Does the dither have any effect at 24bit or is the DSD noise greater than the 1/(2^23) amplitude tpdf dither? Well given the result below looks just like the version with dither (above) then it seems like the DSD noise is greater.
+
+[https://dsf2flac.googlecode.com/svn/wiki/testingRev3/converted88200Hz24bitnd.png]
+
+== Conclusions ==
+
+The conversion seems to work well. With the 88200Hz filter there seems to be virtually no loss in the noise floor compared to dsd. The result for 176400Hz indicates that there may be a slight issue with the filter which needs to be looked at. I'll generate a new filter and see if that improves the situation.
+
+If I have the chance I'll do a similar test with multitones to see what happens to the intermodulation products.
