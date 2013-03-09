@@ -1,0 +1,13 @@
+#summary Testing the conversion process on revision 3
+
+= Process =
+
+Stage 1.
+
+Create a 176.4kHz 32bit wav file in Matlab with a 1kHz tone at -3dBFs. I added 1/(2^24) peak amplitude of tpdf dither (i.e. equiv to the significant precision).
+
+
+
+
+
+
