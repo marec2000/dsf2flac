@@ -1,11 +1,14 @@
 #summary Testing the conversion process on revision 3
 
-= Process =
+== Stage 1. Create a test signal ==
 
-Stage 1.
+I created a 176.4kHz 32bit wav file in Matlab with a 1kHz tone at -3dBFs. I added 1/(2^24) peak amplitude of tpdf dither (i.e. equiv to the significand precision).
 
-Create a 176.4kHz 32bit wav file in Matlab with a 1kHz tone at -3dBFs. I added 1/(2^24) peak amplitude of tpdf dither (i.e. equiv to the significant precision).
-
-The fft spectrum of 1 sec of the data is shown below. This was computed in Matlab from the wav file.
+The fft spectrum of 1 sec of the data is shown below. Note that this results in a 1Hz bin spacing so the 1kHz tone falls into a single bin. This was computed in Matlab from the wav file. It looks pretty good, no harmonics are visible and the dither/quantization noise is hovering at around -190dB.
 
 [https://dsf2flac.googlecode.com/svn/wiki/wav%20test%20tone.png]
+
+== Stage 2. Convert to DSD (DSF) ==
+
+The only tool I have to convert to DSD is Audiogate. This was the reason for choosing 32bit 176.4kHz wav as Audiogate cannot read anything higher.
+
