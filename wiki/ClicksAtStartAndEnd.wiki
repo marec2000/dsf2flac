@@ -22,7 +22,7 @@ What made up sample data should we put into the buffer? A pretty sensible choice
 
 You can probably guess the rest now. The issue with DSD is that there is no way to represent zero. The DSD signal is always switching between 0 and 1. There is always energy in the signal.
 
-Given that we can't fill the buffer with zeros, the obvious choice is to use a sequence of samples which represent silence. In DSD speak these are called idle tones. For convenience DSD is often represented and stored 8 samples at a time in a byte of data. Here are a few examples of 1 sample idle tones (also given in hex):
+Given that we can't fill the buffer with zeros, the obvious choice is to use a sequence of samples which represent silence. In DSD speak these are called idle tones. For convenience DSD is often represented and stored 8 samples at a time in a byte of data. Here are a few examples of 8 sample idle tones (also given in hex):
 
   # 0xAA: 10101010
   # 0x55: 01010101
@@ -65,8 +65,6 @@ Revision 37 applies method 1 above.
 If you have a DSDIFF edit master than you should be able to do disc at once ( method 2 above) although please note that I've not tested edit masters yet plus you'll end up with one large flac file with all the track in it.
 I'll have a look into method 3 because that seems a better default than method 1.
 Long term I'll get edit masters working and splitting tracks. Plus I'll try to allow the user to specify a preceding and following track from the command line and use the data from these to fill the buffer.
-
-
 
 
 
