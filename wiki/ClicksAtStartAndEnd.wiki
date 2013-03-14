@@ -20,7 +20,7 @@ However, for arguments sake, let's say we are not happy to loose the first 0.1 m
 
 This is the method used in the example above which gives the click.
 
-Only one thing is left to decide, what made up sample data should we put into the buffer? A pretty sensible choice is to fill the buffer with zeros. The reason that this is sensible is that we are making up part of the audio signal here and if we use zeros then the made up part has no energy so it will not cause any irregularity in the output.
+What made up sample data should we put into the buffer? A pretty sensible choice is to fill the buffer with zeros. The reason that this is sensible is that we are effectively making up part of the audio signal and if we use zeros then the made up part has no energy so it will not cause any irregularity in the output.
 
 You can probably guess the rest now. The issue with DSD is that there is no way to represent zero. The DSD signal is always switching between 0 and 1. There is always energy in the signal.
 
@@ -31,9 +31,9 @@ Given that we can't fill the buffer with zeros, the obvious choice is to use a s
 0xCA: 11001010
 0x69: 01101001
 
-I could go on, there are loads of them!
+I could go on, there are loads of them! Note that each contains four 1's and four 0's. In DSD all of these are silent. However, all of them have a lot of energy in the signal. The energy is at high frequencies out of the audio band. However, if you suddenly change from one silent DSD signal to another silent DSD signal then at the transition then energy will not be confined to the inaudible part of the frequency spectrum. It is exactly the same effect that occurs if you cut short a pcm audio signal - you will hear a click. The thing that makes DSD strange is that you can't hear the signal before the click (because it is above the audio bandwidth).
 
-
+To demonstrate this I made a special DSD file with 8000 samples using the idle tone 0x69 and then another 8000 using the idle tone 0xCA.
 
 
 
