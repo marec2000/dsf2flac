@@ -48,7 +48,7 @@ In terms of dsd -> pcm conversion there are a few options:
 
 2) Convert the whole disc at once
 
-SACD discs are continuous DSD streams, if you convert the whole disc at once then you only have to worry about the clicks at the start and the end. For discs where track boundaries occur in the middle of the music this might be the best option as truncation is likely to result in clicks just due to the discontinuity between tracks.
+SACD discs are continuous DSD streams, if you convert the whole disc at once then you only have to worry about the clicks at the start and the end of the disc where silence is pretty likely. For discs where track boundaries occur in the middle of the music this might be the best option as truncation is likely to result in clicks just due to the discontinuity between tracks.
 
 3) Apply a short fade and fade out.
 
@@ -65,8 +65,6 @@ Revision 37 applies method 1 above.
 If you have a DSDIFF edit master than you should be able to do disc at once ( method 2 above) although please note that I've not tested edit masters yet plus you'll end up with one large flac file with all the track in it.
 I'll have a look into method 3 because that seems a better default than method 1.
 Long term I'll get edit masters working and splitting tracks. Plus I'll try to allow the user to specify a preceding and following track from the command line and use the data from these to fill the buffer.
-
-
 
 
 
