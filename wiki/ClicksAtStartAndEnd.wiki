@@ -1,0 +1,16 @@
+#Looking into why there are sometimes clicks and pops at the start and end of the tracks
+
+= Introduction =
+
+A common issue with dsd -> pcm conversion is the occurrence of click at the start and ends of the tracks. These clicks can sometimes be very loud and not just annoying but also potentially damaging of equipment. Why do these occur? How can they be prevented?
+
+
+= A Simple Example =
+
+The image below is taken from Audacity and shows a DSD64 track which has been converted to 88.2kHz pcm. I've zoomed right in so that the click at the start can be seen.
+
+The highest point of the click occurs at 9 samples into the pcm data. In this particular case I converted the track using a FIR filter with 575 taps (575 samples long). This filter operates on the raw DSD data at a sampling rate of 2282.4kHz. The FIR filter is a linear phase type, this means that all frequencies pass through the filter with their relative timings unchanged. However, the filter does change the absolute timing: the output is delayed by half of the length of the filter (289 DSD samples). The output sample rate is 88.2kHz which is 32 times slower than the DSD raw data rate. So 289 samples at DSD rate is equivalent to 9.032 output samples. 
+
+
+
+[https://dsf2flac.googlecode.com/svn/wiki/clicks/example1.png]
