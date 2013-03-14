@@ -9,8 +9,35 @@ A common issue with dsd -> pcm conversion is the occurrence of click at the star
 
 The image below is taken from Audacity and shows a DSD64 track which has been converted to 88.2kHz pcm. I've zoomed right in so that the click at the start can be seen.
 
-The highest point of the click occurs at 9 samples into the pcm data. In this particular case I converted the track using a FIR filter with 575 taps (575 samples long). This filter operates on the raw DSD data at a sampling rate of 2282.4kHz. The FIR filter is a linear phase type, this means that all frequencies pass through the filter with their relative timings unchanged. However, the filter does change the absolute timing: the output is delayed by half of the length of the filter (289 DSD samples). The output sample rate is 88.2kHz which is 32 times slower than the DSD raw data rate. So 289 samples at DSD rate is equivalent to 9.032 output samples. 
-
+The highest point of the click occurs at 9 samples into the pcm data. In this particular case I converted the track using a FIR filter with 575 taps (575 samples long). This filter operates on the raw DSD data at a sampling rate of 2282.4kHz. The FIR filter is a linear phase type, this means that all frequencies pass through the filter with their relative timings unchanged. However, the filter does change the absolute timing: the output is delayed by half of the length of the filter (289 DSD samples). The output sample rate is 88.2kHz which is 32 times slower than the DSD raw data rate. So 289 samples at DSD rate is equivalent to 9.032 output samples, hence the 9 sample delay before the click.
 
 
 [https://dsf2flac.googlecode.com/svn/wiki/clicks/example1.png]
+
+With an 575 tap FIR filter you MUST have 575 samples read into a buffer before you can calculate your first output sample. Thereafter you can just keep pushing more samples in the buffer and dropping one out the other end.  Remembering that we get a 289 sample delay in absolute time when applying the filter, this means that the first output sample you can calculate from the input data is the 289th (in DSD samples). So, are we happy to loose 288 DSD samples from the start of the data? Perhaps we are, after all that is only 0.1 milli second.
+
+However, for arguments sake, let's say we are not happy to loose the first 0.1 milli second. So what do we do? Basically we make up some extra data and put it into the buffer before we start to filter. Then we can put a real sample in the front and calculate the first output sample using 574 made up samples and the first sample from our data. Great, that works! 
+
+This is the method used in the example above which gives the click.
+
+Only one thing is left to decide, what made up sample data should we put into the buffer? A pretty sensible choice is to fill the buffer with zeros. The reason that this is sensible is that we are making up part of the audio signal here and if we use zeros then the made up part has no energy so it will not cause any irregularity in the output.
+
+You can probably guess the rest now. The issue with DSD is that there is no way to represent zero. The DSD signal is always switching between 0 and 1. There is always energy in the signal.
+
+Given that we can't fill the buffer with zeros, the obvious choice is to use a sequence of samples which represent silence. In DSD speak these are called idle tones. For convenience DSD is often represented and stored 8 samples at a time in a byte of data. Here are a few examples of 1 sample idle tones (also given in hex):
+
+0xAA: 10101010
+0x55: 01010101
+0xCA: 11001010
+0x69: 01101001
+
+I could go on, there are loads of them!
+
+
+
+
+
+
+
+
+
