@@ -179,7 +179,7 @@ template <typename sampleType> void DsdDecimator::getSamplesInternal(
 		bool roundToInt)
 {
 	// check the buffer seems sensible
-	div_t d = div(bufferLen,getNumChannels());
+	ldiv_t d = ldiv(bufferLen,getNumChannels());
 	if (d.rem) {
 		fputs("Buffer length is not a multiple of getNumChannels()",stderr);
 		exit(EXIT_FAILURE);

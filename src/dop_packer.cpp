@@ -99,7 +99,7 @@ unsigned char reverse(unsigned char x)
 
 void DopPacker::pack_buffer(dsf2flac_int32 *buffer, dsf2flac_uint32 bufferLen) {
 	// check the buffer seems sensible
-	div_t d = div(bufferLen,reader->getNumChannels());
+	ldiv_t d = ldiv(bufferLen,reader->getNumChannels());
 	if (d.rem) {
 		fputs("Buffer length is not a multiple of getNumChannels()",stderr);
 		exit(EXIT_FAILURE);
